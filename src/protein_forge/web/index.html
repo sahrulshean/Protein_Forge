@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#101820">
+    <meta name="description" content="Belajar membaca kodon mRNA dan merakit rantai peptida lewat permainan biologi interaktif.">
+    <title>Protein Forge — Laboratorium kecil, penemuan besar</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Langsung ke permainan</a>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Protein Forge, beranda">
+          <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 36 36"><path d="M10 8v20M26 8v20M10 8l16 10M10 18l16 10M10 28l16-10M10 18L26 8"/><circle cx="10" cy="8" r="3"/><circle cx="26" cy="8" r="3"/><circle cx="10" cy="18" r="3"/><circle cx="26" cy="18" r="3"/><circle cx="10" cy="28" r="3"/><circle cx="26" cy="28" r="3"/></svg></span>
+          <span>PROTEIN<span class="brand-light">FORGE</span><small>RUANG BERMAIN BIOLOGI</small></span>
+        </a>
+        <nav class="header-nav" aria-label="Navigasi utama">
+          <button type="button" class="text-button" id="help-button">Cara bermain</button>
+          <button type="button" class="reference-button" data-open-reference><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4h6v12H3zM11 4h6v12h-6zM9 6h2M9 14h2"/></svg>Tabel kodon</button>
+        </nav>
+      </header>
+
+      <main id="main">
+        <noscript><p class="inline-error">Aktifkan JavaScript di browser untuk memainkan Protein Forge.</p></noscript>
+        <section id="welcome-screen" class="screen welcome-screen" aria-labelledby="welcome-title">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="status-dot"></span> LABORATORIUM INTERAKTIF / 01</div>
+            <h1 id="welcome-title">Kode kecil.<br><span>Penemuan besar.</span></h1>
+            <p class="hero-description">Di balik setiap protein, ada pesan tiga huruf. Pecahkan kode mRNA, pilih asam amino, dan rakit rantai peptidamu sendiri.</p>
+            <div class="hero-actions">
+              <button type="button" class="primary-button" id="start-button">Mulai merakit <span aria-hidden="true">↗︎</span></button>
+              <span class="time-note">6 kodon <span>·</span> Tanpa batas waktu</span>
+            </div>
+            <div id="start-error" class="inline-error" role="alert" hidden></div>
+            <div class="hero-note"><span class="small-orbit" aria-hidden="true">✳</span> Rasa ingin tahu adalah satu-satunya prasyarat.</div>
+          </div>
+
+          <div class="lab-illustration" aria-label="Ilustrasi: kodon mRNA AUG diterjemahkan menjadi asam amino metionin">
+            <div class="illustration-top"><span><span class="status-dot"></span> SIMULASI TRANSLASI</span><span class="mono">RNA → PEPTIDA</span></div>
+            <div class="orbital-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><span class="orbit-satellite satellite-one"></span><span class="orbit-satellite satellite-two"></span></div>
+            <div class="demo-rna"><span class="rna-end">5′</span><span class="demo-codon muted-codon">GCU</span><span class="demo-codon active-codon"><i>A</i><i>U</i><i>G</i></span><span class="demo-codon muted-codon">UGG</span><span class="rna-end">3′</span></div>
+            <div class="translation-track" aria-hidden="true"><span></span><span>↓</span><span></span></div>
+            <div class="demo-residue"><span class="residue-orbit"><strong>M</strong></span><div><span class="micro-label">ASAM AMINO</span><strong>Metionin</strong><small>Awal sebuah rantai.</small></div></div>
+            <div class="illustration-bottom"><span class="mono">3 BASA · 1 PESAN</span><span class="illustration-chip">Mulai dari AUG</span></div>
+          </div>
+
+          <div class="learning-path">
+            <div class="path-heading"><span class="micro-label">DARI KODE MENJADI RANTAI</span><span class="path-rule"></span><span class="mono">01 — 03</span></div>
+            <div class="step-grid">
+              <article class="step-card"><span class="step-number">01</span><div><h2>Baca pesannya</h2><p>Setiap tiga basa mRNA membentuk satu kodon.</p></div></article>
+              <article class="step-card"><span class="step-number">02</span><div><h2>Temukan pasangannya</h2><p>Pilih asam amino yang disandi kodon tersebut.</p></div></article>
+              <article class="step-card"><span class="step-number">03</span><div><h2>Bangun rantainya</h2><p>Sambungkan hasilnya hingga mencapai kodon stop.</p></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section id="game-screen" class="screen game-screen" aria-labelledby="game-title" hidden>
+          <div class="section-heading"><div><div class="eyebrow">EKSPERIMEN / TRANSLASI mRNA</div><h1 id="game-title" tabindex="-1">Satu kodon, satu langkah.</h1><p>Ikuti pesan dari kiri ke kanan dan lengkapi rantai peptida.</p></div><span class="session-badge"><span class="status-dot"></span> Eksperimen berlangsung</span></div>
+          <div class="game-grid">
+            <section class="question-card" aria-label="Kodon saat ini">
+              <div class="question-topline"><span class="micro-label">PESAN mRNA <span class="direction">5′ → 3′</span></span><span id="round-label" class="mono">KODON 1 / 6</span></div>
+              <div id="codon-track" class="codon-track" aria-label="Urutan kodon"></div>
+              <div class="question-body"><span class="micro-label" id="question-label">KODON INI MENYANDI APA?</span><div id="current-codon" class="current-codon" aria-label="Kodon saat ini"></div><p id="question-prompt">Pilih asam amino yang tepat.</p></div>
+              <div id="answer-options" class="answer-options" role="group" aria-labelledby="question-label"></div>
+              <div class="question-footer"><div id="feedback" class="feedback" role="status" aria-live="polite"><span>Setiap jawaban adalah kesempatan belajar.</span></div><button id="next-button" type="button" class="primary-button next-button" hidden>Lanjutkan <span aria-hidden="true">→</span></button></div>
+              <p class="keyboard-note">Gunakan tombol <kbd>1</kbd>–<kbd>4</kbd> atau klik untuk memilih.</p>
+            </section>
+            <aside class="experiment-sidebar">
+              <section class="score-card" aria-label="Skor permainan"><div><span class="micro-label">SKOR EKSPERIMEN</span><strong id="score-value">000</strong><span class="score-max">/ 600 poin</span></div><span class="score-mark" aria-hidden="true">✧</span><div class="best-score-row"><span>Rekor pribadimu</span><strong id="best-score-value">0</strong></div></section>
+              <section class="chain-card"><div class="card-heading"><span class="micro-label">RANTAI PEPTIDAMU</span><span id="chain-count" class="mono">0 / 5</span></div><div id="peptide-chain" class="peptide-chain" aria-label="Rantai peptida yang sudah dirakit"></div><p>Lima asam amino. Satu rantai pendek. Banyak hal untuk dipelajari.</p></section>
+              <div class="field-note"><span class="note-icon" aria-hidden="true">↳</span><div><h2>Catatan laboratorium</h2><p>mRNA memakai basa U (urasil), bukan T. Satu asam amino bisa disandi beberapa kodon.</p><button class="inline-link" type="button" data-open-reference>Lihat tabel kodon <span aria-hidden="true">↗︎</span></button></div></div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="result-screen" class="screen result-screen" aria-labelledby="result-title" hidden>
+          <div class="result-emblem" aria-hidden="true">✳</div><div class="eyebrow">EKSPERIMEN SELESAI</div><h1 id="result-title" tabindex="-1">Pesannya berhasil dirakit.</h1><p class="result-description">Dari tiga huruf menjadi rantai peptida. Kamu baru saja mengikuti langkah dasar translasi.</p>
+          <div class="result-stats"><div><span class="micro-label">SKOR AKHIR</span><strong id="final-score">600<span>/ 600</span></strong></div><div><span class="micro-label">TEPAT DI COBAAN PERTAMA</span><strong id="final-accuracy">6<span>/ 6 kodon</span></strong></div></div>
+          <p id="record-message" class="record-message"></p><div class="result-chain-card"><span class="micro-label">RANTAI HASIL EKSPERIMEN</span><div id="final-chain" class="final-chain"></div><p>Kodon stop mengakhiri translasi dan tidak menambahkan asam amino.</p></div><p class="science-note">Ini simulasi rantai peptida pendek. Protein nyata memiliki struktur dan fungsi yang lebih kompleks.</p>
+          <div class="result-actions"><button id="restart-button" type="button" class="primary-button">Eksperimen lagi <span aria-hidden="true">↗︎</span></button><button type="button" class="secondary-button" data-open-reference>Jelajahi tabel kodon</button></div><div id="restart-error" class="inline-error" role="alert" hidden></div>
+        </section>
+      </main>
+
+      <footer class="site-footer"><span>Dirakit dengan rasa ingin tahu.</span><span>PROTEIN FORGE <span class="footer-dot">·</span> KODE GENETIK STANDAR</span></footer>
+    </div>
+
+    <dialog id="reference-dialog" class="reference-dialog" aria-labelledby="reference-title"><div class="dialog-top"><div><div class="eyebrow">CATATAN REFERENSI</div><h2 id="reference-title">Satu tabel, 64 pesan.</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Tutup tabel kodon">×</button></div><p class="dialog-description">Kode genetik standar untuk mRNA. Baca setiap kodon dari arah 5′ ke 3′.</p><label class="search-label" for="codon-search">Cari kodon atau asam amino</label><input id="codon-search" class="codon-search" type="search" placeholder="Misalnya AUG, metionin, atau stop" autocomplete="off"><p id="reference-status" class="reference-status" role="status" aria-live="polite"></p><button id="reference-retry" class="secondary-button" type="button" hidden>Coba muat lagi</button><div class="codon-table-scroll"><table class="codon-table"><thead><tr><th scope="col">Kodon mRNA</th><th scope="col">Kode</th><th scope="col">Asam amino / sinyal</th></tr></thead><tbody id="codon-table-body"></tbody></table></div><p class="table-note">AUG menyandi metionin dan biasanya menjadi kodon awal. UAA, UAG, dan UGA adalah sinyal stop.</p></dialog>
+    <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title"><div class="dialog-top"><div><div class="eyebrow">SEBELUM BEREKSPERIMEN</div><h2 id="help-title">Ikuti pesannya.</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Tutup cara bermain">×</button></div><ol class="help-steps"><li><strong>Baca satu kodon.</strong><p>Setiap kodon terdiri dari tiga basa mRNA: A, U, G, atau C.</p></li><li><strong>Pilih pasangannya.</strong><p>Klik salah satu dari empat jawaban. Jawaban tepat di percobaan pertama mendapat 100 poin. Setelah salah, kamu tetap bisa mendapat 50 poin.</p></li><li><strong>Rakit sampai stop.</strong><p>Selesaikan enam kodon: lima asam amino dan satu sinyal stop. Tidak ada batas waktu; tabel kodon boleh dibuka kapan saja.</p></li></ol><p class="help-footnote">Rekor tersimpan hanya di browser ini. Eksperimen memakai kode genetik standar dan rantai contoh, bukan urutan protein tertentu.</p><button class="primary-button" type="button" data-close-dialog>Siap, saya mengerti <span aria-hidden="true">→</span></button></dialog>
+  </body>
+</html>

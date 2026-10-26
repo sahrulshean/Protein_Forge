@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "protein-forge"
+version = "0.1.0"
+description = "Game edukasi biologi: baca kodon mRNA dan rakit rantai peptida"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+protein-forge = "protein_forge.cli:main"
+protein-forge-play = "protein_forge.server:main"
+
+[dependency-groups]
+dev = ["pytest>=8.4,<9"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+protein_forge = ["web/*.html", "web/*.css", "web/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"

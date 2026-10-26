@@ -1,0 +1,27 @@
+PROTEIN FORGE — GAME EDUKASI BIOLOGI
+
+CARA CEPAT MENJALANKAN
+1. Ekstrak ZIP ini.
+2. Pastikan Python 3.12 atau lebih baru tersedia di komputer.
+3. Buka terminal di folder src di dalam hasil ekstraksi.
+4. Jalankan:
+
+   python -m protein_forge.server
+
+   Jika perintah python tidak tersedia, gunakan python3 (macOS/Linux)
+   atau py (Windows) sebagai gantinya.
+5. Buka browser pada host lokal komputer Anda, port 8000.
+6. Pilih Mulai merakit. Hentikan server melalui Ctrl+C di terminal.
+
+Game memakai pustaka standar Python. Cara cepat di atas tidak memerlukan
+pip, uv, database, API key, atau koneksi internet.
+
+ISI GAME
+- Enam ronde membaca kodon mRNA dan merakit peptida lima residu.
+- Skor, penjelasan, tabel 64 kodon, rekor browser, dan main ulang.
+- Tampilan desktop dan ponsel.
+
+PENGEMBANGAN
+README.md menjelaskan instalasi paket, pengujian, dan lingkungan cloud.
+Folder tests berisi tes pytest. uv.lock mengunci dependensi pengembangan.
+Lingkungan virtual, cache, riwayat Git, dan secret tidak disertakan.
