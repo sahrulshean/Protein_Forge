@@ -1,27 +1,28 @@
-PROTEIN FORGE — GAME EDUKASI BIOLOGI
+PROTEIN FORGE — VERSI GODOT 4
 
-CARA CEPAT MENJALANKAN
+CARA MENJALANKAN DI GODOT
 1. Ekstrak ZIP ini.
-2. Pastikan Python 3.12 atau lebih baru tersedia di komputer.
-3. Buka terminal di folder src di dalam hasil ekstraksi.
-4. Jalankan:
+2. Jalankan Godot 4.6.x (proyek diuji dengan Godot 4.6.3).
+3. Pada Project Manager, klik Import.
+4. Pilih project.godot pada folder utama hasil ekstraksi.
+5. Buka proyek, lalu tekan F5 atau tombol Run Project.
+6. Klik Mulai merakit.
 
-   python -m protein_forge.server
-
-   Jika perintah python tidak tersedia, gunakan python3 (macOS/Linux)
-   atau py (Windows) sebagai gantinya.
-5. Buka browser pada host lokal komputer Anda, port 8000.
-6. Pilih Mulai merakit. Hentikan server melalui Ctrl+C di terminal.
-
-Game memakai pustaka standar Python. Cara cepat di atas tidak memerlukan
-pip, uv, database, API key, atau koneksi internet.
+Versi ini memakai GDScript dan antarmuka native Godot. Tidak memerlukan Python,
+browser, server, plugin, koneksi internet, atau instalasi dependensi tambahan.
+Tidak perlu export templates untuk menjalankan proyek dari editor.
 
 ISI GAME
 - Enam ronde membaca kodon mRNA dan merakit peptida lima residu.
-- Skor, penjelasan, tabel 64 kodon, rekor browser, dan main ulang.
-- Tampilan desktop dan ponsel.
+- Skor, penjelasan, tabel 64 kodon yang dapat dicari, rekor, dan main ulang.
+- Rekor disimpan lokal di user:// milik Godot.
 
-PENGEMBANGAN
-README.md menjelaskan instalasi paket, pengujian, dan lingkungan cloud.
-Folder tests berisi tes pytest. uv.lock mengunci dependensi pengembangan.
-Lingkungan virtual, cache, riwayat Git, dan secret tidak disertakan.
+BERKAS UTAMA
+- project.godot: proyek yang di-import ke Godot.
+- godot/scenes/main.tscn: scene utama.
+- godot/scripts/main.gd: antarmuka permainan.
+- godot/scripts/game_session.gd: data kodon dan aturan permainan.
+- godot/tests/: pengujian native Godot.
+
+README.md berisi penjelasan lebih lengkap. Versi web Python sebelumnya tetap
+tersedia di src/, tetapi tidak digunakan untuk menjalankan versi Godot.

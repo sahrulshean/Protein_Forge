@@ -1,10 +1,43 @@
 # Protein Forge
 
 Game edukasi biologi berbahasa Indonesia: baca kodon mRNA, pilih asam amino yang
-tepat, dan rakit rantai peptida pendek. Permainan berjalan di browser, dilayani
-oleh Python tanpa dependensi runtime tambahan.
+tepat, dan rakit rantai peptida pendek. Versi utama sekarang merupakan proyek
+native **Godot 4**, dengan antarmuka dan logika permainan dalam GDScript.
 
-## Menjalankan hasil unduhan ZIP
+## Buka dan jalankan di Godot
+
+1. Ekstrak ZIP proyek.
+2. Jalankan **Godot 4.6.x** (diuji menggunakan Godot 4.6.3).
+3. Di Project Manager, pilih **Import** dan pilih berkas **project.godot**
+   pada folder utama hasil ekstraksi.
+4. Buka proyek, lalu tekan **F5** atau tombol **Run Project**.
+5. Pilih **Mulai merakit** untuk bermain.
+
+Versi Godot berjalan secara lokal tanpa Python, browser, server, plugin,
+koneksi internet, atau aset tambahan. Scene utama berada di
+`godot/scenes/main.tscn`; logika sesi ada di `godot/scripts/game_session.gd`.
+Gunakan mouse atau keyboard untuk memilih jawaban dan tombol Escape untuk
+menutup tabel kodon. Rekor disimpan melalui `user://` milik Godot.
+
+Proyek menggunakan renderer **Compatibility**. Tidak perlu melakukan export
+atau memasang export templates untuk menjalankannya dari editor.
+
+### Pengujian Godot
+
+Di lingkungan cloud yang sudah menyediakan Godot:
+
+```bash
+cd /workspace/Protein_Forge
+bash scripts/check-godot.sh
+```
+
+Skrip melakukan import proyek, menguji kode genetik dan aturan permainan,
+lalu menjalankan scene asli untuk menguji alur tombol, skor, STOP, main ulang,
+tabel kodon, dan penyimpanan rekor. `GODOT_BIN` dapat digunakan untuk memilih
+lokasi executable Godot. Saat dipakai di luar cloud, arahkan `XDG_CACHE_HOME`
+dan `XDG_DATA_HOME` ke direktori yang dapat ditulis.
+
+## Versi web Python (opsional)
 
 Ekstrak ZIP, buka terminal di folder hasil ekstraksi, lalu jalankan dengan
 Python 3.12 atau lebih baru:
@@ -17,9 +50,9 @@ python -m protein_forge.server
 Gunakan `python3` (macOS/Linux) atau `py` (Windows) jika perintah `python`
 tidak tersedia. Buka browser pada host lokal komputer Anda, port `8000`.
 Cara ini tidak memerlukan instalasi dependensi atau koneksi internet.
-Panduan singkat juga tersedia dalam `MULAI_DI_SINI.txt`.
+Versi web lama tetap tersedia sebagai alternatif; tidak diperlukan untuk Godot.
 
-## Persiapan dan menjalankan game
+## Setup pengembangan versi web (opsional)
 
 Gunakan Python 3.12 dan `uv`, yang sudah tersedia di lingkungan cloud ini.
 
@@ -48,8 +81,8 @@ arahkan `UV_CACHE_DIR` ke direktori cache yang dapat ditulis jika diperlukan.
 4. Baca penjelasan sebelum melanjutkan. Tabel kodon dapat dibuka sebagai bantuan.
 5. Akhiri translasi pada kodon stop, lihat hasil, lalu mainkan rantai baru.
 
-Skor maksimum adalah 600. Rekor disimpan di browser perangkat yang sama;
-permainan tetap berjalan jika penyimpanan browser tidak tersedia.
+Skor maksimum adalah 600. Rekor disimpan secara lokal: melalui `user://` pada
+Godot atau penyimpanan browser pada versi web.
 
 Permainan menggunakan **kode genetik standar**: AUG memulai latihan dengan
 metionin, empat kodon berikutnya menambahkan residu, dan kodon stop mengakhiri
@@ -57,7 +90,7 @@ translasi tanpa menambahkan asam amino. Hasilnya rantai peptida lima residu,
 bukan simulasi pelipatan atau pembentukan protein fungsional. Variasi kode
 genetik organisme/organel dan modifikasi pascatranslasi tidak dimodelkan.
 
-## Pengujian
+## Pengujian versi web
 
 ```bash
 cd /workspace/Protein_Forge
@@ -99,8 +132,9 @@ Input kosong, residu ambigu/nonkanonik, simbol stop, dan header FASTA ditolak.
 
 Gunakan checkout `/workspace/Protein_Forge` yang sudah tersedia. Setiap task
 cloud terisolasi; tidak perlu membuat Git worktree kecuali diminta. File dan
-dependensi dapat disimpan dalam snapshot, tetapi proses server harus dimulai
-kembali pada task baru menggunakan instruksi `start_skill`.
+dependensi dapat disimpan dalam snapshot. Untuk versi Godot, buka proyek dengan
+engine Godot; tidak ada layanan server yang perlu dijalankan. Jika memakai
+versi web, mulai kembali server pada task baru.
 
 Instalasi dependensi menggunakan `pypi.org` dan `files.pythonhosted.org` dengan
 verifikasi TLS tetap aktif. Pemeriksaan browser memakai Chromium dari
